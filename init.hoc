@@ -1,0 +1,60 @@
+load_file("nrngui.hoc")
+
+
+// -------------------procedure for adding Shape Plot-------------------------
+objref ShapeWindow
+
+proc shape(){
+     ShapeWindow = new PlotShape()
+     ShapeWindow.show(0)
+     ShapeWindow.exec_menu("Shape Plot")
+     fast_flush_list.append(ShapeWindow)
+}
+
+xopen("const.hoc")
+xopen("addGraphs.hoc")
+xopen("createPYCell.hoc")
+xopen("createPYNetwork.hoc")
+xopen("addstim.hoc")
+
+
+//----------------------------------------------------------------------------
+//  add graphs
+//----------------------------------------------------------------------------
+
+
+addgraph("neuron[0].soma.v(0.5)",-80,40)
+addgraph("neuron[1].soma.v(0.5)",-80,40)
+
+if (PLOT_SHAPE) { shape()}
+
+//-------------------resterGraph-------------------
+objref timevec, idvec
+timevec = new Vector()
+idvec = new Vector()
+
+
+for i = 0, NumberConnections - 1 {
+  CellConnection[i].record(timevec, idvec, i+1)
+  // printf("Neuron %d\n", i)
+}
+
+objref rasterGraph
+rasterGraph = new Graph()
+rasterGraph.size(0, tstop, 0, NumberConnections + 1)
+
+
+//---------------------go--------------------------
+proc go() {
+    init()
+    run()
+    idvec.mark(rasterGraph, timevec, "T")
+}
+
+// add RunControl menu
+nrncontrolmenu()
+
+
+
+
+

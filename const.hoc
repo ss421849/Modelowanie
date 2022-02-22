@@ -1,0 +1,35 @@
+// general simulation settings 
+tstart = 0
+tstop = 1000
+PLOT_SHAPE = 1
+
+// createPYNetwork.hoc
+x_0 = 10
+y_0 = 10
+z_0 = 10
+Dx = 10
+Dy = 10
+Dz = 10
+NETDIM_X = 10
+NETDIM_Y = 10
+NETDIM_Z = 1
+
+NumberCells = NETDIM_X * NETDIM_Y * NETDIM_Z
+MAXNUMBER_CONNECTION = NumberCells^2
+
+CONNECTION_PROB = 0.6
+CONNECTION_THRESHOLD = 10    // Próg po którym komórka odpala
+CONNECTION_DELAY     = 3     // Tak naprawdę chodzi o stałą, która przemnożona przez długość aksonu daje opóźnienie
+CONNECTION_WEIGHT    = .004  // (mho), czyli WEIGHT * V = [natężenie_prądu_dla_adresata] 
+
+// addStim.hoc
+NETIN_SP_X = -20
+NETIN_SP_Y = -20
+NETIN_SP_Z = 0
+
+NETIN_SP_START    = 25
+NETIN_SP_INTERVAL = 5
+NETIN_SP_NUMBER   = 1
+NETIN_SP_NOISE    = 0
+NETIN_SP_TARGET   = 0
+NETIN_SP_WEIGHT   = .004

@@ -1,0 +1,45 @@
+begintemplate PYCell
+  public soma, syn, syn_in, axon 
+  public x, y, z
+  public addConnection
+
+  create soma, axon
+  objref syn, syn_in
+
+  proc init() {
+    x = $1
+    y = $2
+    z = $3
+
+    soma {
+        diam = 5
+        L = 5
+        insert hh
+        syn = new ExpSyn(.5)
+        syn.tau = 5
+        syn.e = 0
+        syn_in = new ExpSyn(.5)
+        syn_in.tau = 5
+        syn_in.e = -70 
+     
+        // set lattice position of cell
+        pt3dclear()
+        pt3dadd(x-L/2, y, z, diam)
+        pt3dadd(x+L/2, y, z, diam)
+    }
+
+    axon {
+        diam = 1
+        L=1
+    }
+}
+
+proc addConnection() {
+    axon {
+        pt3dadd(x, y, z, 1)
+        pt3dadd($1, $2, $3, 1)
+    }
+}
+
+endtemplate PYCell
+

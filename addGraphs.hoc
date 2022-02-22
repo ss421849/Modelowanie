@@ -1,0 +1,14 @@
+objectvar g[20]
+ngraph = 0
+
+proc addgraph() { local ii
+  ngraph = ngraph+1
+  ii = ngraph-1
+  g[ii] = new Graph()
+  g[ii].size(tstart,tstop,$2,$3)
+  g[ii].xaxis()
+  g[ii].yaxis()
+  g[ii].addexpr($s1,4,0)
+  g[ii].save_name("graphList[0].")
+  graphList[0].append(g[ii])
+}

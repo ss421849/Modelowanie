@@ -1,0 +1,17 @@
+objref StimTrigger, NetInput
+
+create Presynapse
+
+Presynapse {
+  pt3dclear()
+  pt3dadd(NETIN_SP_X, NETIN_SP_Y, NETIN_SP_Z, 10)
+  pt3dadd(NETIN_SP_X+10, NETIN_SP_Y, NETIN_SP_Z, 10)
+
+  StimTrigger = new NetStim(0.5)
+  StimTrigger.start = NETIN_SP_START
+  StimTrigger.interval = NETIN_SP_INTERVAL
+  StimTrigger.number = NETIN_SP_NUMBER
+  StimTrigger.noise = NETIN_SP_NOISE
+
+  NetInput = new NetCon(StimTrigger, neuron[NETIN_SP_TARGET].syn, 0.5, 0, NETIN_SP_WEIGHT)
+}

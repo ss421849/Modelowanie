@@ -1,0 +1,37 @@
+objref neuron[NumberCells]
+
+l = 0
+for i = 0, NETDIM_X - 1 {
+  for j = 0, NETDIM_Y - 1 {
+    for k = 0, NETDIM_Z - 1 {
+      neuron[l] = new PYCell(x_0+i*Dx, y_0+j*Dy, z_0+k*Dz)
+      // neuron[l].IAF.tau = IAF_TAU
+      // neuron[l].IAF.refrac = IAF_REFRAC
+      l = l + 1
+    }
+  }
+}
+
+access neuron[0].soma
+
+NumberConnections = 0
+NumberPossibleConnections = 0
+objref prob
+prob = new Random()
+
+objref CellConnection[MAXNUMBER_CONNECTION]
+
+for i = 0, NumberCells - 1 {
+  for j = 0, NumberCells - 1 {
+    NumberPossibleConnections = NumberPossibleConnections + 1
+    aprob = prob.uniform(0, 1)
+    if ((aprob <= CONNECTION_PROB) && (i != j)) {
+      adist = sqrt((neuron[i].x - neuron[j].x)^2 + (neuron[i].y - neuron[j].y)^2)
+      neuron[i].soma CellConnection[NumberConnections] = new NetCon(&v(.5), neuron[j].syn, CONNECTION_THRESHOLD, CONNECTION_DELAY*adist, CONNECTION_WEIGHT)
+      //CellConnection[NumberConnections] = new NetCon(neuron[i].IAF, neuron[j].IAF, CONNECTION_THRESHOLD, CONNECTION_DELAY*adist, CONNECTION_WEIGHT)
+      NumberConnections = NumberConnections + 1
+    }
+  }
+}
+
+

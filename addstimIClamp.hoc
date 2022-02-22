@@ -1,0 +1,6 @@
+objref stimobj
+
+neuron[0].soma stimobj = new IClamp(0.5)
+stimobj.del  = 10
+stimobj.dur = 1
+stimobj.amp = 1
