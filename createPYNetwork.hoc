@@ -1,18 +1,5 @@
-objref neuron[NumberCells]
-
-l = 0
-for i = 0, NETDIM_X - 1 {
-  for j = 0, NETDIM_Y - 1 {
-    for k = 0, NETDIM_Z - 1 {
-      neuron[l] = new PYCell(x_0+i*Dx, y_0+j*Dy, z_0+k*Dz)
-      // neuron[l].IAF.tau = IAF_TAU
-      // neuron[l].IAF.refrac = IAF_REFRAC
-      l = l + 1
-    }
-  }
-}
-
-access neuron[0].soma
+// objref neuron[NumberCells]
+objref neurons
 
 NumberConnections = 0
 NumberPossibleConnections = 0
@@ -21,17 +8,78 @@ prob = new Random()
 
 objref CellConnection[MAXNUMBER_CONNECTION]
 
-for i = 0, NumberCells - 1 {
-  for j = 0, NumberCells - 1 {
-    NumberPossibleConnections = NumberPossibleConnections + 1
-    aprob = prob.uniform(0, 1)
-    if ((aprob <= CONNECTION_PROB) && (i != j)) {
-      adist = sqrt((neuron[i].x - neuron[j].x)^2 + (neuron[i].y - neuron[j].y)^2)
-      neuron[i].soma CellConnection[NumberConnections] = new NetCon(&v(.5), neuron[j].syn, CONNECTION_THRESHOLD, CONNECTION_DELAY*adist, CONNECTION_WEIGHT)
-      //CellConnection[NumberConnections] = new NetCon(neuron[i].IAF, neuron[j].IAF, CONNECTION_THRESHOLD, CONNECTION_DELAY*adist, CONNECTION_WEIGHT)
-      NumberConnections = NumberConnections + 1
-    }
-  }
+proc createNeurons() { local l
+	l = 0
+
+	NETDIM_X = $1
+	NETDIM_Y = $2
+	NETDIM_Z = $3
+	
+	x_0	=	$4
+	y_0	=	$5
+	z_0	=	$6
+
+	Dx = $7
+	Dy = $8
+	Dz = $9 
+
+	$o10 = new Vector(NumberCells)
+	//print $&10[0]
+
+	//objref neurons
+	//neurons = $&10
+	// Internet mówi, że $&10 to jest jakieś odwołanie do tablicy
+
+	for i = 0, NETDIM_X - 1 {
+		for j = 0, NETDIM_Y - 1 {
+		  for k = 0, NETDIM_Z - 1 {
+		    $o10.x[l] = new PYCell(x_0+i*Dx, y_0+j*Dy, z_0+k*Dz)	
+		    //neuron[l] = new PYCell(x_0+i*Dx, y_0+j*Dy, z_0+k*Dz)
+		    // neuron[l].IAF.tau = IAF_TAU
+		    // neuron[l].IAF.refrac = IAF_REFRAC
+		    l = l + 1
+		  }
+		}
+	}
+
+	print $&10[0]
 }
+
+proc createConnections() {
+	NumberSourceCells = $1
+	NumberTargetCells = $2
+
+	connection_prob = $3
+
+	connection_threshold = $4
+	connection_delay 		 = $5
+	connection_weight 	 = $6
+
+ 	// neurons = $7
+
+	for i = 0, NumberSourceCells - 1 {
+		for j = 0, NumberTargetCells - 1 {
+		  NumberPossibleConnections = NumberPossibleConnections + 1
+		  aprob = prob.uniform(0, 1)
+		  if ((aprob <= connection_prob) && (i != j)) {
+				print "Hello"
+		    adist = sqrt((neuron.x[i].x - neuron.x[j].x)^2 + (neuron.x[i].y - neuron.x[j].y)^2)
+		    neuron.x[i].soma CellConnection[NumberConnections] = new NetCon(&v(.5), neuron.x[j].syn, connection_threshold, connection_delay*adist, connection_weight)
+		    NumberConnections = NumberConnections + 1
+		  }
+		}
+	}
+}
+
+
+
+createNeurons(NETDIM_X, NETDIM_Y, NETDIM_Z, x_0, y_0, z_0, Dx, Dy, Dz, neuron)
+
+access neuron[0].soma
+
+createConnections(NumberCells, NumberCells, CONNECTION_PROB, CONNECTION_THRESHOLD, CONNECTION_DELAY, CONNECTION_WEIGHT)
+
+
+
 
 

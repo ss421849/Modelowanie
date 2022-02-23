@@ -1,0 +1,72 @@
+// general simulation settings 
+tstart = 0
+tstop = 1000
+PLOT_SHAPE = 1
+
+// createPYNetwork.hoc
+x_0_PY = 10
+y_0_PY = 10
+z_0_PY = 10
+Dx_Py = 10
+Dy_PY = 10
+Dz_PY = 10
+NETDIM_X_PY = 10
+NETDIM_Y_PY = 10
+NETDIM_Z_PY = 1
+
+NumberPYCells = NETDIM_X_PY * NETDIM_Y_PY * NETDIM_Z_PY
+
+
+x_0_In = 15
+y_0_In = 15
+z_0_In = 15
+Dx_In = 20
+Dy_In = 20
+Dz_In = 20
+NETDIM_X_In = 5
+NETDIM_Y_In = 5
+NETDIM_Z_In = 1
+
+NumberInCells = NETDIM_X_In * NETDIM_Y_In * NETDIM_Z_In
+
+
+MAXNUMBER_CONNECTION = (NumberPYCells + NumberInCells)^2
+
+// Constants for connections from PYCell to PYCell (P2P)
+CONNECTION_PROB_P2P 	 = 0.6
+CONNECTION_THRESHOLD_P2P = 10    // Próg po którym komórka odpala
+CONNECTION_DELAY_P2P     = 3     // Tak naprawdę chodzi o stałą, która przemnożona przez długość aksonu daje opóźnienie
+CONNECTION_WEIGHT_P2P    = .004  // (mho), czyli WEIGHT * V = [natężenie_prądu_dla_adresata] 
+
+
+// Constants for connections from PYCell to InCell (P2I)
+CONNECTION_PROB_P2I 	 = 0.6
+CONNECTION_THRESHOLD_P2I = 10    // Próg po którym komórka odpala
+CONNECTION_DELAY_P2I     = 3     // Tak naprawdę chodzi o stałą, która przemnożona przez długość aksonu daje opóźnienie
+CONNECTION_WEIGHT_P2I    = .004  // (mho), czyli WEIGHT * V = [natężenie_prądu_dla_adresata] 
+
+
+// Constants for connections from InCell to PYCell (I2P)
+CONNECTION_PROB_I2P 	 = 0.6
+CONNECTION_THRESHOLD_I2P = 10    // Próg po którym komórka odpala
+CONNECTION_DELAY_I2P     = 3     // Tak naprawdę chodzi o stałą, która przemnożona przez długość aksonu daje opóźnienie
+CONNECTION_WEIGHT_I2P    = .004  // (mho), czyli WEIGHT * V = [natężenie_prądu_dla_adresata] 
+
+
+// Constants for connections from InCell to InCell (I2I)
+CONNECTION_PROB_I2I 	 = 0.6
+CONNECTION_THRESHOLD_I2I = 10    // Próg po którym komórka odpala
+CONNECTION_DELAY_I2I     = 3     // Tak naprawdę chodzi o stałą, która przemnożona przez długość aksonu daje opóźnienie
+CONNECTION_WEIGHT_I2I    = .004  // (mho), czyli WEIGHT * V = [natężenie_prądu_dla_adresata] 
+
+// addStim.hoc
+NETIN_SP_X = -20
+NETIN_SP_Y = -20
+NETIN_SP_Z = 0
+
+NETIN_SP_START    = 25
+NETIN_SP_INTERVAL = 5
+NETIN_SP_NUMBER   = 1
+NETIN_SP_NOISE    = 0
+NETIN_SP_TARGET   = 0
+NETIN_SP_WEIGHT   = .004
