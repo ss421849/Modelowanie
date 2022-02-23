@@ -1,0 +1,69 @@
+/** Plik łączący istniejące komórki IAFCells połączeniami typu NetCon
+ *      dla każdego możliwego połączenia (bez pętelek) mamy PICK_PROBABILITY
+ *      (patrz constants.hoc) szans, że będzie ono obecne. Opóźnienie w
+ *      przesyle jest zależne od odległości między komórkami.
+ *
+ *      Tworzymy, również losowe wejście dla komórek pobudzających.
+ */
+
+// Łączymy komórki losowo
+objref NetConsList
+objref netcon
+prob.uniform(0, 1) //<- ustaw rodzaj losowania
+NetConsList = new List()
+
+for i = 0, TOTAL_CELLS - 1 {
+    for j = 0, TOTAL_CELLS - 1 {
+        if (i != j) {
+            p = prob.repick() //<- i am speed
+            if (p <= PICK_PROBABILITY) {
+                dist = sqrt(                            \
+                    (neurons[i].x - neurons[j].x)^2 +   \
+                    (neurons[i].y - neurons[j].y)^2 +   \
+                    (neurons[i].z - neurons[j].z)^2     \
+                )
+
+                // i-ty neuron jest hamujący => to połączenie jest hamujące i vice versa
+                if (is_inhibitory[i] == IS_INHIBITORY) {
+                    netcon = new NetCon(neurons[i].IAF, neurons[j].IAF, \
+                        INHIBITORY_IAF_NETCON_THRESHOLD,                \
+                        INHIBITORY_IAF_NETCON_BASE_DELAY*dist,          \
+                        INHIBITORY_IAF_NETCON_WEIGHT                    \
+                    )
+                } else {
+                    netcon = new NetCon(neurons[i].IAF, neurons[j].IAF, \
+                        EXCITATORY_IAF_NETCON_THRESHOLD,                \
+                        EXCITATORY_IAF_NETCON_BASE_DELAY*dist,          \
+                        EXCITATORY_IAF_NETCON_WEIGHT                    \
+                    )
+                }
+                // Dodajemy połączenie na listę wszystkich połączeń
+                NetConsList.append(netcon)
+            }
+        }
+    }
+}
+q = 0
+for i = 0, TOTAL_CELLS - 1 {
+    if (is_inhibitory[i] == IS_INHIBITORY) {
+        printf("Neuron %d is INHIBITORY\n", i)
+        q = q + 1
+    }
+}
+q
+// Komórki pobudzające otrzymują zewnętrzne pobudzenie
+objref Stims[EXCITATORY_CELLS]
+objref Inputs[EXCITATORY_CELLS]
+k = 0
+for i = 0, TOTAL_CELLS - 1 {
+    if (is_inhibitory[i] == NOT_INHIBITORY){
+        Stims[k] = new NetStim(0.5)
+        Stims[k].start = EXCITATORY_STIM_TRIGGER_START
+        Stims[k].interval = EXCITATORY_STIM_TRIGGER_INTERVAL
+        Stims[k].number = EXCITATORY_STIM_TRIGGER_NUMBER
+        Stims[k].noise = EXCITATORY_STIM_TRIGGER_NOISE
+
+        Inputs[k] = new NetCon(Stims[k], neurons[k].IAF, EXCITATORY_INPUT_NETCON_THRESHOLD, EXCITATORY_INPUT_NETCON_BASE_DELAY, EXCITATORY_IAF_NETCON_WEIGHT)
+        k = k + 1
+    }
+}

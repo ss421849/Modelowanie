@@ -1,0 +1,29 @@
+load_file("nrngui.hoc")
+objref NULL
+
+xopen("constants.hoc")
+xopen("addGraphs.hoc")
+xopen("neuronIAF.hoc")
+xopen("createNetworkCells.hoc")
+xopen("createConnections.hoc")
+xopen("networkRasterGraph.hoc")
+
+//----------------------------------------------------------------------------
+// dodatkowe wykresy
+//----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+// procedura go
+//----------------------------------------------------------------------------
+proc go() {
+    init()
+    run()
+    idvec.mark(rasterGraph, timevec, "|")
+    if (PRINT_INPUT_RASTER_GRAPH) {idvecIN.mark(rasterGraphIN, timevecIN, "|")}
+
+}
+
+// od razu uruchamiamy go()
+go()

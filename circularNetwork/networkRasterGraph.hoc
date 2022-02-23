@@ -1,0 +1,31 @@
+/** Plik spisujący dane dla wykresu rastrowego
+ *      przygotowuje wykres rastorowy do rysowania.
+ */
+objref timevec, idvec, rasterGraph
+timevec = new Vector()
+idvec = new Vector()
+rasterGraph = new Graph()
+
+objref netcon
+for i = 0, TOTAL_CELLS - 1 {
+    netcon = new NetCon(neurons[i].IAF, NULL)
+    netcon.record(timevec, idvec, i + 1)
+}
+objref netcon
+
+rasterGraph.size(tstart, tstop, 0, TOTAL_CELLS + 1)
+
+objref timevecIN, idvecIN, rasterGraphIN
+if (PRINT_INPUT_RASTER_GRAPH) {
+    timevecIN = new Vector()
+    idvecIN = new Vector()
+    rasterGraphIN = new Graph()
+
+
+    for i = 0, EXCITATORY_CELLS - 1 {
+        //netcon = new NetCon(Stims[i], NULL)
+        Inputs[i].record(timevecIN, idvecIN, i + 1)
+    }
+    rasterGraphIN.size(tstart, tstop, 0, EXCITATORY_CELLS + 1)
+}
+

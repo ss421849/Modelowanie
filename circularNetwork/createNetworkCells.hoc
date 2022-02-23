@@ -1,0 +1,43 @@
+/** Plik tworzący komórki IAFCell w kuli o promieniu 1
+ *      położenie jest losowane we współrzędnych biegunowych
+ *      następnie ze zbioru wszystkich komórek losujemy INHIBITORY_CELLS
+ *      (patrz constants.hoc) komórek, które będą hamujące
+ */
+IS_INHIBITORY = 1
+NOT_INHIBITORY = 0
+
+objref neurons[TOTAL_CELLS]
+
+// Tworzymy komórki
+objref prob
+prob = new Random()
+for i = 0, TOTAL_CELLS - 1{
+    // losujemy współrzędne biegunowe
+    phi = prob.uniform(0, 2*PI)
+    theta = prob.uniform(0, PI)
+    r = prob.uniform(0, 1)
+    // konwertujemy na współrzędne kartezjańskie
+    x = r * sin(theta) * cos(phi)
+    y = r * sin(theta) * sin(phi)
+    z = r * cos(theta)
+
+    neurons[i] = new IAFCell(x, y, z)
+}
+// Wybieramy komórki hamujące
+double all_ids[TOTAL_CELLS]
+double is_inhibitory[TOTAL_CELLS]
+
+for i = 0, TOTAL_CELLS - 1 {
+    all_ids[i] = i
+    is_inhibitory[i] = NOT_INHIBITORY
+}
+
+for i = 0, INHIBITORY_CELLS - 1{
+    id = prob.discunif(i, TOTAL_CELLS - 1)
+    is_inhibitory[all_ids[id]] = IS_INHIBITORY
+    all_ids[id] = all_ids[i]
+    printf("Wylosowany id(%d): %d\n", i + 1, id)
+}
+
+
+
