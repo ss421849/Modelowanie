@@ -21,9 +21,11 @@ proc go() {
     init()
     run()
     idvec.mark(rasterGraph, timevec, "|")
+    ivec.mark(rasterGraph, tvec, "S")
     if (PRINT_INPUT_RASTER_GRAPH) {idvecIN.mark(rasterGraphIN, timevecIN, "|")}
-
+    printf("%d\n\n", prob.discunif(1, 1000))
 }
 
 // od razu uruchamiamy go()
+nrncontrolmenu()
 go()
