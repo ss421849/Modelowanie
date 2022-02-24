@@ -5,7 +5,7 @@ begintemplate IAFCell
 
     public x, y, z
     public IAF, addConnection
-    create soma, axon
+    create soma
 
     objref IAF
     
@@ -17,31 +17,29 @@ begintemplate IAFCell
         y = $2
         z = $3
 
-        IAF = new IntFire4(0.5)
-        IAF.taue = 5
-        IAF.taui1 = 9
-        IAF.taui2 = 24
-        IAF.taum = 35
 
         // Czy to jest potrzebne?
         soma {
             diam = 0.1
             L = 0.025
 
+            IAF = new IntFire4(0.5)
+            IAF.taue = 5
+            IAF.taui1 = 9
+            IAF.taui2 = 24
+            IAF.taum = 35
+
+
             pt3dclear()
-            pt3dadd(x-0.025, y, z, 0.1)
-            pt3dadd(x+0.025, y, z, 0.1)
-        }
-        axon {
-            diam = 0.02
-            L = 0.005
+            pt3dadd(x-0.0025, y, z, 0.01)
+            pt3dadd(x+0.0025, y, z, 0.01)
         }
     }
 
     proc addConnection() {
-        axon {
-            pt3dadd(x, y, z, 0.02)
-            pt3dadd($1, $2, $3, 0.02)
+        soma {
+            pt3dadd(x, y, z, 0.002)
+            pt3dadd($1, $2, $3, 0.002)
         }
     }
 endtemplate IAFCell
