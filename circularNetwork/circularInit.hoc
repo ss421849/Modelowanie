@@ -12,6 +12,14 @@ xopen("networkRasterGraph.hoc")
 // dodatkowe wykresy
 //----------------------------------------------------------------------------
 
+objref ShapeWindow
+
+proc shape(){
+     ShapeWindow = new PlotShape()
+     ShapeWindow.show(0)
+     ShapeWindow.exec_menu("Shape Plot")
+     fast_flush_list.append(ShapeWindow)
+}
 
 
 //----------------------------------------------------------------------------
@@ -28,4 +36,5 @@ proc go() {
 
 // od razu uruchamiamy go()
 nrncontrolmenu()
+shape()
 go()
