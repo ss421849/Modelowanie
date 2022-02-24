@@ -1,7 +1,19 @@
 load_file("nrngui.hoc")
 objref NULL
 
-xopen("constants.hoc")
+objref ShapeWindow
+proc shape(){
+     ShapeWindow = new PlotShape()
+     ShapeWindow.show(0)
+     //ShapeWindow.exec_menu("Shape Plot")
+     //ShapeWindow.variable("IAF.m")
+     fast_flush_list.append(ShapeWindow)
+}
+
+ xopen("constants.hoc")
+// xopen("noise.hoc")
+//xopen("period_constants.hoc")
+//xopen("prolonged_short_input.hoc")
 xopen("addGraphs.hoc")
 xopen("neuronIAF.hoc")
 xopen("createNetworkCells.hoc")
@@ -12,7 +24,9 @@ xopen("networkRasterGraph.hoc")
 // dodatkowe wykresy
 //----------------------------------------------------------------------------
 
-
+shape()
+addgraph("neurons[12].IAF.M", -1, 1)
+addgraph("neurons[random_inhibitory_cell_id].IAF.M", -1, 1)
 
 //----------------------------------------------------------------------------
 // procedura go

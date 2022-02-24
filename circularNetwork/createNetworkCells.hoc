@@ -12,10 +12,10 @@ objref neurons[TOTAL_CELLS]
 objref prob
 
 prob = new Random(LAST_RAND_SEED)
-a = prob.discunif(1, 1000)
+a = prob.discunif(1, 100000)
 prob = new Random(a)
-printf("%d\n\n", prob.discunif(1, 1000))
-
+printf("[%d]\n\n", prob.discunif(1, 100000))
+// To NIE generuje rozkładu jednostajnego na kuli!
 for i = 0, TOTAL_CELLS - 1{
     // losujemy współrzędne biegunowe
     phi = prob.uniform(0, 2*PI)
@@ -31,6 +31,7 @@ for i = 0, TOTAL_CELLS - 1{
     neurons[i] = new IAFCell(x, y, z)
 }
 // Wybieramy komórki hamujące
+
 double all_ids[TOTAL_CELLS]
 double is_inhibitory[TOTAL_CELLS]
 objref ivec, tvec
@@ -39,18 +40,38 @@ for i = 0, TOTAL_CELLS - 1 {
     all_ids[i] = i
     is_inhibitory[i] = NOT_INHIBITORY
 }
+// all_ids[i] == i dla każdego i
+// is_inhibitory[i] = NOT_INHIBITORY dla każdego i
 
+// wektory do oznaczenia pozycji kom. hamujących na wykresie rastrowym
 tvec = new Vector()
 ivec = new Vector()
 
+
+
+// Wybieramy spośród  od i do (TOTAL_CELLS - 1) jeden element -> id
+// oznaczamy komorkę o indeksie "id" jako hamującą
+// zamieniamy miejscami i-ty indeks z indeksem id, teraz
+// gdy zwiększymy i o 1, będziemy losowali tylko z jeszcze nie wybranych indeksów
+// ponieważ już wylosowany jest na miejscu i-tym (z poprzedniej iteracji)
+// prawdopodobieństwo również się zmieni z 1/TOTAL_CELLS na
+// 1/(TOTAL_CELLS - 1), tak jak by to wyglądało w "matematycznym"
+// losowaniu bez zwracania.
 for i = 0, INHIBITORY_CELLS - 1{
     id = prob.discunif(i, TOTAL_CELLS - 1)
     is_inhibitory[all_ids[id]] = IS_INHIBITORY
+
+    if (i == 13) {
+        random_inhibitory_cell_id = all_ids[id]
+    }
+
+    // zapisujemy pozycję komórki na wykresie rastrowym
     tvec.append(-5)
     ivec.append(all_ids[id] + 1)
-
+    // nie musimy robić pełnej zamiany, już zanazczyliśmy że all_id[id] jest
+    // hamująca
     all_ids[id] = all_ids[i]
-    printf("Wylosowany id(%d): %d\n", i + 1, id)
+    // printf("Wylosowany id(%d): %d\n", i + 1, id)
 }
 
 

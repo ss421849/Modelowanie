@@ -53,7 +53,7 @@ for i = 0, TOTAL_CELLS - 1 {
                     NetConsList.append(netcon)
                     neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
                 }
-            } else { // is_inhibitory[i] == NOT_INHIBITORY && is_inhibitory[j] == NOT_INHIBITORY
+            } else {// is_inhibitory[i] == NOT_INHIBITORY && is_inhibitory[j] == NOT_INHIBITORY
                 if (p <= EE_PICK_PROBABILITY){
                     netcon = new NetCon(neurons[i].IAF, neurons[j].IAF, \
                         EE_IAF_NETCON_THRESHOLD,                \
@@ -80,7 +80,7 @@ for i = 0, TOTAL_CELLS - 1 {
         Stims[k].number = EXCITATORY_STIM_TRIGGER_NUMBER
         Stims[k].noise = EXCITATORY_STIM_TRIGGER_NOISE
 
-        Inputs[k] = new NetCon(Stims[k], neurons[k].IAF, EXCITATORY_INPUT_NETCON_THRESHOLD, EXCITATORY_INPUT_NETCON_BASE_DELAY, EXCITATORY_INPUT_NETCON_WEIGHT)
+        Inputs[k] = new NetCon(Stims[k], neurons[i].IAF, EXCITATORY_INPUT_NETCON_THRESHOLD, EXCITATORY_INPUT_NETCON_BASE_DELAY, EXCITATORY_INPUT_NETCON_WEIGHT)
         k = k + 1
     }
 }
