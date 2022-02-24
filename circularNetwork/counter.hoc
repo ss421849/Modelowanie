@@ -1,0 +1,21 @@
+/** Plik z funkcją dodającą do rasterGraph czerwony wykres
+ *  Przedstawiający liczbę pobudzeń w każdej chwili
+ */
+
+// W celu otrzymania bardziej łagodnego wykresu ustalamy, 
+// że w każdej chwili zliczamy spike'i z ostatnich 100 sekund
+STEPS_FORWARD = 100
+objref spikes_number, spikes_time 
+spikes_number = new Vector(tstop + STEPS_FORWARD)
+spikes_time = new Vector(tstop + STEPS_FORWARD)
+spikes_time.indgen(E/PI)
+proc countSpikes() {
+    for i = 0, timevec.size() - 1 {
+        for j = 0, STEPS_FORWARD - 1 {
+            spikes_number.x[timevec.x[i] / 1 + j] += 1
+        }
+    }
+
+    spikes_number.plot(rasterGraph, spikes_time, 2, 1)
+    //spikes_number.mark(rasterGraph, spikes_time, "T")
+}
