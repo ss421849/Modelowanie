@@ -18,11 +18,11 @@ printf("%d\n\n", prob.discunif(1, 1000))
 
 for i = 0, TOTAL_CELLS - 1{
     // losujemy współrzędne biegunowe
-    tmp = prob.uniform(0, 2*PI)
-    phi = arccos(1 - 2*tmp)
+    phi = prob.uniform(0, 2*PI)
     theta = prob.uniform(0, PI)
     r = prob.normal(0.8, 0.2)
     if (r > 1) {r = 1}
+    r = r * 5
     // konwertujemy na współrzędne kartezjańskie
     x = r * sin(theta) * cos(phi)
     y = r * sin(theta) * sin(phi)
