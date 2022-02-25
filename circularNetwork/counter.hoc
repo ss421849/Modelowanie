@@ -7,8 +7,6 @@
 STEPS_FORWARD = 100
 objref spikes_number, spikes_time 
 spikes_number = new Vector(tstop + STEPS_FORWARD)
-spikes_time = new Vector(tstop + STEPS_FORWARD)
-spikes_time.indgen(E/PI)
 proc countSpikes() {
     for i = 0, timevec.size() - 1 {
         for j = 0, STEPS_FORWARD - 1 {
@@ -16,6 +14,7 @@ proc countSpikes() {
         }
     }
 
-    spikes_number.plot(rasterGraph, spikes_time, 2, 1)
+    //spikes_number.plot(rasterGraph, spikes_time, 2, 1)
+    spikes_number.plot(rasterGraph, 1, 2, 1)
     //spikes_number.mark(rasterGraph, spikes_time, "T")
 }
