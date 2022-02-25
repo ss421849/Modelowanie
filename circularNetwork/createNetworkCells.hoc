@@ -10,7 +10,8 @@ objref neurons[TOTAL_CELLS]
 
 // Tworzymy komórki
 objref prob
-
+// Używane do prostego zmiany ziarna generatora losowego
+// wystarczy zmienić stałą LAST_RAND_SEED na tą wypisaną przez program w []
 prob = new Random(LAST_RAND_SEED)
 a = prob.discunif(1, 100000)
 prob = new Random(a)

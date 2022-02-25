@@ -9,11 +9,15 @@ proc shape(){
      //ShapeWindow.variable("IAF.m")
      fast_flush_list.append(ShapeWindow)
 }
-
-//xopen("constants.hoc")
+//----------------------------------------------------------------------------
+// Tylko jednen zestaw stałych powinien być odkomentowany
+//----------------------------------------------------------------------------
+xopen("constants.hoc")
 //xopen("noise.hoc")
-xopen("period_constants.hoc")
+// xopen("period_constants.hoc")
 //xopen("prolonged_short_input.hoc")
+
+//----------------------------------------------------------------------------
 xopen("addGraphs.hoc")
 xopen("neuronIAF.hoc")
 xopen("createNetworkCells.hoc")
