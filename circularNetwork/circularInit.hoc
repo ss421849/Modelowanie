@@ -10,15 +10,16 @@ proc shape(){
      fast_flush_list.append(ShapeWindow)
 }
 
- xopen("constants.hoc")
-// xopen("noise.hoc")
-//xopen("period_constants.hoc")
+//xopen("constants.hoc")
+//xopen("noise.hoc")
+xopen("period_constants.hoc")
 //xopen("prolonged_short_input.hoc")
 xopen("addGraphs.hoc")
 xopen("neuronIAF.hoc")
 xopen("createNetworkCells.hoc")
 xopen("createConnections.hoc")
 xopen("networkRasterGraph.hoc")
+xopen("counter.hoc")
 
 //----------------------------------------------------------------------------
 // dodatkowe wykresy
@@ -36,6 +37,7 @@ proc go() {
     run()
     idvec.mark(rasterGraph, timevec, "|")
     ivec.mark(rasterGraph, tvec, "S")
+    countSpikes()
     if (PRINT_INPUT_RASTER_GRAPH) {idvecIN.mark(rasterGraphIN, timevecIN, "|")}
     printf("%d\n\n", prob.discunif(1, 1000))
 }
