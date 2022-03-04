@@ -22,6 +22,7 @@ for i = 0, TOTAL_CELLS - 1 {
                 )
 
             p = prob.repick() //<- i am speed
+            c = prob.repick()
             // Połączenie z "jakiej" do "jakiej"
             if (is_inhibitory[i] == IS_INHIBITORY && is_inhibitory[j] == IS_INHIBITORY){
                 if (p <= II_PICK_PROBABILITY){
@@ -31,7 +32,9 @@ for i = 0, TOTAL_CELLS - 1 {
                         II_IAF_NETCON_WEIGHT                    \
                     )
                     NetConsList.append(netcon)
-                    neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    if (c <= DRAW_CONNECTION_PROBABILITY) {
+                        neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    }
                 }
             } else if (is_inhibitory[i] == IS_INHIBITORY && is_inhibitory[j] == NOT_INHIBITORY){
                 if (p <= IE_PICK_PROBABILITY){
@@ -41,7 +44,9 @@ for i = 0, TOTAL_CELLS - 1 {
                         IE_IAF_NETCON_WEIGHT                    \
                     )
                     NetConsList.append(netcon)
-                    neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    if (c <= DRAW_CONNECTION_PROBABILITY) {
+                        neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    }
                 }
             } else if (is_inhibitory[i] == NOT_INHIBITORY && is_inhibitory[j] == IS_INHIBITORY){
                 if (p <= EI_PICK_PROBABILITY){
@@ -51,7 +56,9 @@ for i = 0, TOTAL_CELLS - 1 {
                         EI_IAF_NETCON_WEIGHT                    \
                     )
                     NetConsList.append(netcon)
-                    neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    if (c <= DRAW_CONNECTION_PROBABILITY) {
+                        neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    }
                 }
             } else {// is_inhibitory[i] == NOT_INHIBITORY && is_inhibitory[j] == NOT_INHIBITORY
                 if (p <= EE_PICK_PROBABILITY){
@@ -61,7 +68,9 @@ for i = 0, TOTAL_CELLS - 1 {
                         EE_IAF_NETCON_WEIGHT                    \
                     )
                     NetConsList.append(netcon)
-                    neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    if (c <= DRAW_CONNECTION_PROBABILITY) {
+                        neurons[i].addConnection(neurons[j].x, neurons[j].y, neurons[j].z)
+                    }
                 }
             }
         }

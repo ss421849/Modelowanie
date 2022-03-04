@@ -23,7 +23,10 @@ IE_PICK_PROBABILITY = 0.4
 EI_PICK_PROBABILITY = 0.6
 EE_PICK_PROBABILITY = 1
 
-
+// Zmienna kontrolująca część połączeń jaką będziemy rysować
+// nie ma ona wpływu na funkcjonowanie sieci, jedynie na gęstość
+// połączenia na wykresie ShapePlot
+DRAW_CONNECTION_PROBABILITY = 0.08
 
 
 // Wejście do komórek pobudzających

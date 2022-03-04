@@ -5,7 +5,11 @@
 
     noise.hoc                   - Przykładowe stałe pokazujące działanie (szum) sieci przy stałym losowym wejściu do każdej komórki pobudzającej. Wejście jest obecne przez cały czas trwania symulacji.
 
-    period_constants.hoc        - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje cyklicznie.
+    burst_period.hoc            - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje cyklicznie, tzw. bursty.
+
+    firm_period.hoc             - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje cyklicznie, jednak w sposób bardziej ciągły niż burstowo.
+
+    smooth_period.hoc           - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje rytmicznie, co widać na wykresie chwilowych aktywacji. Praca jest gładka.
 
     prolonged_short_input.hoc   - Podobne do pliku "constants.hoc" lecz tutaj odpowiedź jest słabsza, mimo to nadal jest dość długa.
 

@@ -4,8 +4,8 @@
 begintemplate IAFCell
 
     public x, y, z
-    public addConnection, IAF
-    create soma
+    public addConnection, IAF, soma
+    create soma, axon
 
     objref IAF
 
@@ -16,8 +16,8 @@ begintemplate IAFCell
 
 
         soma {
-            diam = 0.1
-            L = 0.025
+            diam = 1
+            L = 0.5
             
             IAF = new IntFire4(0.5)
             IAF.taue = 6
@@ -27,13 +27,17 @@ begintemplate IAFCell
 
 
             pt3dclear()
-            pt3dadd(x-0.0025, y, z, 0.01)
-            pt3dadd(x+0.0025, y, z, 0.01)
+            pt3dadd(x-0.05, y, z, 0.15)
+            pt3dadd(x+0.05, y, z, 0.15)
+        }
+        axon {
+            diam = 0.025
+            L = 0.05
         }
     }
 
     proc addConnection() {
-        soma {
+        axon {
             pt3dadd(x, y, z, 0.01)
             pt3dadd($1, $2, $3, 0.01)
         }

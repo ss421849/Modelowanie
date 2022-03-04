@@ -3,7 +3,7 @@
 
 // Ustawienia globalne
 tstart = 0
-tstop = 7500
+tstop = 4000
 dt = 0.025
 
 LAST_RAND_SEED = 586
@@ -23,7 +23,10 @@ IE_PICK_PROBABILITY = 0.6
 EI_PICK_PROBABILITY = 0.6
 EE_PICK_PROBABILITY = 1
 
-
+// Zmienna kontrolująca część połączeń jaką będziemy rysować
+// nie ma ona wpływu na funkcjonowanie sieci, jedynie na gęstość
+// połączenia na wykresie ShapePlot
+DRAW_CONNECTION_PROBABILITY = 0.08
 
 
 // Wejście do komórek pobudzających
@@ -44,7 +47,7 @@ EI_IAF_NETCON_WEIGHT = 0.02975
 
 // Połączenia pobudzające komórki pobudzające
 EE_IAF_NETCON_THRESHOLD = -10
-EE_IAF_NETCON_BASE_DELAY = 34.5
+EE_IAF_NETCON_BASE_DELAY = 34.575
 EE_IAF_NETCON_WEIGHT = 0.018
 
 
