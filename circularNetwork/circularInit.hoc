@@ -20,12 +20,11 @@ proc shape(){
 //----------------------------------------------------------------------------
 // Tylko jednen zestaw stałych powinien być odkomentowany
 //----------------------------------------------------------------------------
-// xopen("constants.hoc")
-// xopen("examples/prolonged_short_input.hoc")
+xopen("constants.hoc")
 // xopen("examples/noise.hoc")
 // xopen("examples/burst_period.hoc")
 // xopen("examples/firm_period.hoc")
-xopen("examples/smooth_period.hoc")
+// xopen("examples/smooth_period.hoc")
 // xopen("examples/extra_smooth_period.hoc")
 
 //----------------------------------------------------------------------------

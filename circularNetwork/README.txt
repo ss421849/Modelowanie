@@ -12,8 +12,7 @@
     smooth_period.hoc           - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje rytmicznie, co widać na wykresie chwilowych aktywacji. Praca jest gładka.
 
     extra_smooth_period.hoc     - Przykładowe stałe pokazujące działanie sieci przy stałym losowym wejściu. Sieć pracuje rytmicznie, co widać na wykresie chwilowych aktywacji. Praca wydaje się losowa patrząc na wykres rastrowy, jednak dopiero dzięki zliczaniu aktywacji widzimy zachowanie periodyczne.
-    
-    prolonged_short_input.hoc   - Podobne do pliku "constants.hoc" lecz tutaj odpowiedź jest słabsza, mimo to nadal jest dość długa.
+
 
 
 Żeby wywołać model z innym zestawem stałych należy wykomentować odpowiednią linijkę z xopen("...") w pliku circularInit.hoc i odkomentować z odpowiednim zestawem stałych.
