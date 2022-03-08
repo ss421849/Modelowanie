@@ -1,3 +1,6 @@
+/**
+ * Symulacje uruchamiamy poleceniem "go()"
+ */
 load_file("nrngui.hoc")
 objref NULL
 
@@ -18,11 +21,12 @@ proc shape(){
 // Tylko jednen zestaw stałych powinien być odkomentowany
 //----------------------------------------------------------------------------
 // xopen("constants.hoc")
-// xopen("prolonged_short_input.hoc")
-// xopen("noise.hoc")
-// xopen("burst_period.hoc")
-// xopen("firm_period.hoc")
-// xopen("smooth_period.hoc")
+// xopen("examples/prolonged_short_input.hoc")
+// xopen("examples/noise.hoc")
+// xopen("examples/burst_period.hoc")
+// xopen("examples/firm_period.hoc")
+xopen("examples/smooth_period.hoc")
+// xopen("examples/extra_smooth_period.hoc")
 
 //----------------------------------------------------------------------------
 xopen("addGraphs.hoc")
@@ -68,6 +72,4 @@ proc go() {
     if (PRINT_INPUT_RASTER_GRAPH) {idvecIN.mark(rasterGraphIN, timevecIN, "|")}
 }
 
-// od razu uruchamiamy go()
 nrncontrolmenu()
-go()

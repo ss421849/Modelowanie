@@ -13,8 +13,6 @@ proc countSpikes() {
             spikes_number.x[timevec.x[i] / 1 + j] += 1
         }
     }
-
-    //spikes_number.plot(rasterGraph, spikes_time, 2, 1)
+    
     spikes_number.plot(rasterGraph, 1, 2, 1)
-    //spikes_number.mark(rasterGraph, spikes_time, "T")
 }

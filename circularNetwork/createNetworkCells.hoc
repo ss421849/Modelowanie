@@ -62,6 +62,7 @@ for i = 0, INHIBITORY_CELLS - 1{
     id = prob.discunif(i, TOTAL_CELLS - 1)
     is_inhibitory[all_ids[id]] = IS_INHIBITORY
 
+    // Zapamiętujemy id jakiejś komórki hamującej
     if (i == 13) {
         random_inhibitory_cell_id = all_ids[id]
     }
@@ -72,7 +73,6 @@ for i = 0, INHIBITORY_CELLS - 1{
     // nie musimy robić pełnej zamiany, już zanazczyliśmy że all_id[id] jest
     // hamująca
     all_ids[id] = all_ids[i]
-    // printf("Wylosowany id(%d): %d\n", i + 1, id)
 }
 
 
